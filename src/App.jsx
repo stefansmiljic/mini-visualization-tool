@@ -3,6 +3,7 @@ import useTriviaData from "./hooks/useTriviaData";
 import Filter from "./components/Filter";
 import CategoryChart from "./components/CategoryChart";
 import DifficultyChart from "./components/DifficultyChart";
+import "./App.css";
 
 export default function App() {
   const { questions, loading, error } = useTriviaData();
@@ -30,21 +31,37 @@ export default function App() {
     return Object.entries(map).map(([difficulty, count]) => ({ difficulty, count }));
   }, [filtered]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p style={{ textAlign: "center" }}>Loading questions...</p>;
+  if (error) return <p style={{ textAlign: "center" }}>Error: {error}</p>;
 
   return (
-    <div style={{ fontFamily: "sans-serif", padding: "1rem" }}>
-      <h2 style={{ textAlign: "center" }}>Open Trivia Dashboard</h2>
-      <Filter categories={categories} selected={selectedCategory} onChange={setSelectedCategory} />
-      <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
-        <div style={{ flex: 1, minWidth: "350px" }}>
-          <CategoryChart data={categoryData} />
+    <>
+      <header>
+        <h1>Trivia Data Dashboard</h1>
+      </header>
+
+      <main>
+        <div className="filter-section">
+          <Filter
+            categories={categories}
+            selected={selectedCategory}
+            onChange={setSelectedCategory}
+          />
         </div>
-        <div style={{ flex: 1, minWidth: "350px" }}>
-          <DifficultyChart data={difficultyData} />
-        </div>
+
+        <div className="dashboard">
+      <div className="chart-card">
+        <h2>Questions by Category</h2>
+        <CategoryChart data={categoryData} />
+      </div>
+      <div className="chart-card">
+        <h2>Questions by Difficulty</h2>
+        <DifficultyChart data={difficultyData} />
       </div>
     </div>
+
+    <footer>Data source: Open Trivia DB</footer>
+      </main>
+    </>
   );
 }

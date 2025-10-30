@@ -9,7 +9,7 @@ export default function DifficultyChart({ data }) {
     <div style={{ width: "100%", height: 300 }}>
       <h3 style={{ textAlign: "center" }}>Questions by Difficulty</h3>
       <ResponsiveContainer>
-        <PieChart>
+        <PieChart margin={{top: 20, right: 30, left: 20, bottom: 30}}>
           <Pie
             dataKey="count"
             data={filteredData}
