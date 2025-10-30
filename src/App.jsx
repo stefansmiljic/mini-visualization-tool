@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import useTriviaData from "./hooks/useTriviaData";
 import Filter from "./components/Filter";
 import CategoryChart from "./components/CategoryChart";
@@ -6,6 +6,16 @@ import DifficultyChart from "./components/DifficultyChart";
 import "./App.css";
 
 export default function App() {
+  const [theme, setTheme] = useState("light");
+
+  useEffect(()=> {
+    document.body.setAttribute("data-theme", theme)
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev)=>(prev==="light"?"dark":"light"));
+  }
+
   const { questions, loading, error } = useTriviaData();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -36,8 +46,11 @@ export default function App() {
 
   return (
     <>
-      <header>
+      <header className="header">
         <h1>Trivia Data Dashboard</h1>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+        </button>
       </header>
 
       <main>
