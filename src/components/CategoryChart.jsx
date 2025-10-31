@@ -8,7 +8,7 @@ export default function CategoryChart({ data }) {
           <XAxis dataKey="category" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="count" fill="#8884d8" />
+          <Bar dataKey="count" fill="#008dff" />
         </BarChart>
       </ResponsiveContainer>
     </div>

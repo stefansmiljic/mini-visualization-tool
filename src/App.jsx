@@ -49,7 +49,7 @@ export default function App() {
       <header className="header">
         <h1>Trivia Data Dashboard</h1>
         <button className="theme-toggle" onClick={toggleTheme}>
-          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          {theme === "light" ? "🌙" : "☀️"}
         </button>
       </header>
 
